@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'place.dart';
 
 class PlaceCard extends StatelessWidget {
   final String id;
