@@ -81,7 +81,7 @@ class PlaceCard extends StatelessWidget {
                     children: [
                       const Icon(Icons.car_repair),
                       const SizedBox(width: 6),
-                      Text('$availability'),
+                      Text('$availability Spots'),
                     ],
                   ),
                 ],
