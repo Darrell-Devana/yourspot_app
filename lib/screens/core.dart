@@ -37,7 +37,7 @@ class _CoreScreenState extends State<CoreScreen> {
   @override
   Widget build(BuildContext context) {
     final place = dummyPlace;
-    FocusNode _focusNode = FocusNode();
+    FocusNode focusNode = FocusNode();
 
     return Scaffold(
       appBar: AppBar(
@@ -64,7 +64,7 @@ class _CoreScreenState extends State<CoreScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
             child: TextField(
               keyboardType: TextInputType.text,
-              focusNode: _focusNode,
+              focusNode: focusNode,
               decoration: InputDecoration(
                 hintText: 'Search',
                 filled: true,
@@ -76,7 +76,7 @@ class _CoreScreenState extends State<CoreScreen> {
                 prefixIcon: const Icon(Icons.search),
               ),
               onChanged: (value) {
-                _focusNode.requestFocus();
+                focusNode.requestFocus();
                 List<Place> filteredList = place
                     .where((place) =>
                         place.title.toLowerCase().contains(value.toLowerCase()))
@@ -86,7 +86,7 @@ class _CoreScreenState extends State<CoreScreen> {
                 });
               },
               onSubmitted: (value) {
-                _focusNode.unfocus();
+                focusNode.unfocus();
               },
             ),
           ),

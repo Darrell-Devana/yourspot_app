@@ -21,9 +21,9 @@ class MainApp extends StatelessWidget {
       ),
       routes: {
         HomeScreen.routeName: (context) =>
-            HomeScreen(filteredPlaces: [], updateFilteredPlaces: (value) {}),
+            HomeScreen(filteredPlaces: const [], updateFilteredPlaces: (value) {}),
         FavoriteScreen.routeName: (context) => FavoriteScreen(
-            filteredPlaces: [], updateFilteredPlaces: (value) {}),
+            filteredPlaces: const [], updateFilteredPlaces: (value) {}),
         PlaceDetail.routeName: (context) => const PlaceDetail(),
       },
     );

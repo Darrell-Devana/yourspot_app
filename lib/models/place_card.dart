@@ -17,7 +17,7 @@ class PlaceCard extends StatelessWidget {
   void selectPlace(BuildContext context) {
     Navigator.of(context).pushNamed(
       PlaceDetail.routeName,
-      arguments: {'id': id, 'title': title},
+      arguments: {'id': id, 'title': title, 'imageUrl': imageUrl},
     );
   }
 
@@ -29,7 +29,7 @@ class PlaceCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),
-        elevation: 4,
+        elevation: 10,
         margin: const EdgeInsets.all(10),
         child: Column(
           children: [
