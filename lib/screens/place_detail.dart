@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yourspot_app/dummy_data/dummy_data.dart';
 import '../models/parking_space.dart';
+import 'favorite.dart';
 
 class PlaceDetail extends StatefulWidget {
   static const String routeName = '/placedetail';
@@ -12,8 +13,11 @@ class PlaceDetail extends StatefulWidget {
 }
 
 class _PlaceDetailState extends State<PlaceDetail> {
+  List<ParkingSpace> favoritedParkingSpace = [];
+
   @override
   Widget build(BuildContext context) {
+    bool isFavorite = false;
     final routeArgs =
         ModalRoute.of(context)!.settings.arguments as Map<String, String>;
     final String placeId = routeArgs['id']!;
@@ -28,6 +32,33 @@ class _PlaceDetailState extends State<PlaceDetail> {
         selectedPlace.title,
         style: const TextStyle(fontWeight: FontWeight.bold),
       ),
+      actions: [
+        IconButton(
+          onPressed: () {
+            setState(() {
+              isFavorite = !isFavorite; // Toggle the favorite state
+              if (isFavorite) {
+                favoritedParkingSpace = dummyParkingSpace
+                    .where((space) => space.category == selectedPlace.id)
+                    .toList();
+              } else {
+                favoritedParkingSpace = [];
+              }
+            });
+            // Navigate to the favorites page and pass the necessary data
+            Navigator.pushNamed(
+              context,
+              FavoriteScreen.routeName,
+              arguments: favoritedParkingSpace,
+            );
+          },
+          icon: Icon(
+            // ignore: dead_code
+            isFavorite ? Icons.favorite : Icons.favorite_border,
+            color: Colors.red,
+          ),
+        ),
+      ],
     );
 
     final int availableSpaces =
