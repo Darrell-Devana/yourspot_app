@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:yourspot_app/dummy_data/dummy_data.dart';
 import 'package:yourspot_app/models/place.dart';
@@ -61,7 +62,7 @@ class _CoreScreenState extends State<CoreScreen> {
         actions: [
           //sign out button
           IconButton(
-            onPressed: () {},
+            onPressed: () => FirebaseAuth.instance.signOut(),
             icon: const Icon(Icons.logout),
           ),
         ],
