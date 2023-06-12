@@ -13,6 +13,7 @@ class FavoriteScreen extends StatefulWidget {
 
 class _FavoriteScreenState extends State<FavoriteScreen> {
   List<Place> filteredPlaces = [];
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -85,6 +86,20 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
             filteredPlaces.isNotEmpty ? filteredPlaces.length : place.length,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        onTap: (int index) {
+          setState(() {
+            _currentIndex = index; // Update the current index
+          });
+          switch (index) {
+            case 0:
+              Navigator.pushNamed(context, '/'); // Navigate to home screen
+              break;
+            case 1:
+              Navigator.pushNamed(context, '/favorite');
+              break;
+            // Add more cases for additional screens
+          }
+        },
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -95,6 +110,8 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
             label: 'Favorites',
           ),
         ],
+        selectedItemColor: Colors.blue,
+        unselectedItemColor: Colors.grey,
       ),
     );
   }
