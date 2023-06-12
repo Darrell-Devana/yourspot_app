@@ -31,7 +31,11 @@ class _PlaceDetailState extends State<PlaceDetail> {
       ),
       actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            setState(() {
+              isFavorite = !isFavorite;
+            });
+          },
           icon: Icon(
             isFavorite ? Icons.favorite : Icons.favorite_border,
             color: Colors.red,
@@ -148,4 +152,3 @@ class _PlaceDetailState extends State<PlaceDetail> {
     );
   }
 }
-

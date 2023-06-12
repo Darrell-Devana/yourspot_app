@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:yourspot_app/dummy_data/dummy_data.dart';
 import 'package:yourspot_app/screens/core.dart';
@@ -6,9 +7,16 @@ import 'package:yourspot_app/screens/login.dart';
 import 'package:yourspot_app/screens/home.dart';
 import 'package:yourspot_app/screens/place_detail.dart';
 import 'models/place.dart';
-import 'pack';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+Future<void> initializeFirebase() async {
+  await Firebase.initializeApp();
+}
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initializeFirebase();
   runApp(const MainApp());
 }
 
@@ -22,30 +30,17 @@ class MainApp extends StatefulWidget {
 class _MainAppState extends State<MainApp> {
   List<Place> favoritePlaces = [];
 
-  void _toggleFavorite(String placeId) {
-    final existingIndex =
-        favoritePlaces.indexWhere((place) => place.id == placeId);
-    if (existingIndex >= 0) {
-      setState(() {
-        favoritePlaces.removeAt(existingIndex);
-      });
-    } else {
-      setState(() {
-        favoritePlaces.add(
-          dummyPlace.firstWhere((place) => place.id == placeId),
-        );
-      });
-    }
-  }
-
-  bool _isPlaceFavorite(String placeId) {
-    return favoritePlaces.any((place) => place.id == placeId);
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: LoginPage(),
+      home: StreamBuilder<User?>(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return CoreScreen();
+            } else
+              return LoginPage();
+          }),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,

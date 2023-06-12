@@ -5,36 +5,52 @@ import '../models/textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  LoginPage({super.key});
-
-  // text editing controllers
-  final usernameController = TextEditingController();
-  final passwordController = TextEditingController();
-
   // sign user in method
   Future<UserCredential> signInWithGoogle() async {
-    final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser!.authentication;
+    try {
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser!.authentication;
 
-    final OAuthCredential credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
+      final OAuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      final UserCredential userCredential =
+          await _auth.signInWithCredential(credential);
+      return userCredential;
+    } catch (error) {
+      // Handle sign-in error
+      throw error;
+    }
+  }
+
+  Future SignIn() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: emailController.text.trim(),
+      password: passwordController.text.trim(),
     );
-
-    final UserCredential userCredential =
-        await _auth.signInWithCredential(credential);
-    return userCredential;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Color.fromARGB(255, 224, 224, 224),
       body: SafeArea(
         child: Center(
           child: Column(
@@ -63,7 +79,7 @@ class LoginPage extends StatelessWidget {
 
               // username textfield
               MyTextField(
-                controller: usernameController,
+                controller: emailController,
                 hintText: 'Username',
                 obscureText: false,
               ),
@@ -96,8 +112,8 @@ class LoginPage extends StatelessWidget {
               const SizedBox(height: 25),
 
               // sign in button
-              const MyButton(
-                onTap: null,
+              MyButton(
+                onTap: SignIn,
               ),
 
               const SizedBox(height: 50),
@@ -133,11 +149,14 @@ class LoginPage extends StatelessWidget {
               const SizedBox(height: 50),
 
               // google + apple sign in buttons
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // google button
-                  SquareTile(imagePath: 'lib/images/google.png'),
+                  InkWell(
+                    onTap: () {},
+                    child: SquareTile(imagePath: 'lib/images/google.png'),
+                  ),
 
                   SizedBox(width: 25),
 

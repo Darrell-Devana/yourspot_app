@@ -58,12 +58,11 @@ class _CoreScreenState extends State<CoreScreen> {
             fontSize: 25,
           ),
         ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: CircleAvatar(
-              radius: 18,
-            ),
+        actions: [
+          //sign out button
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.logout),
           ),
         ],
         bottom: PreferredSize(
