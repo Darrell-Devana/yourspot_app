@@ -20,7 +20,8 @@ class MainApp extends StatelessWidget {
         brightness: Brightness.dark,
       ),
       routes: {
-        HomeScreen.routeName: (context) => const HomeScreen(),
+        HomeScreen.routeName: (context) =>
+            HomeScreen(filteredPlaces: [], updateFilteredPlaces: (value) {}),
         FavoriteScreen.routeName: (context) => const FavoriteScreen(),
         PlaceDetail.routeName: (context) => const PlaceDetail(),
       },

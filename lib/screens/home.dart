@@ -5,7 +5,14 @@ import 'package:yourspot_app/models/place.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/home';
-  const HomeScreen({super.key});
+  final List<Place> filteredPlaces;
+  final Function(List<Place> filteredList) updateFilteredPlaces;
+
+  const HomeScreen({
+    super.key,
+    required this.filteredPlaces,
+    required this.updateFilteredPlaces,
+  });
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -13,12 +20,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<Place> filteredPlaces = [];
-  final int _currentIndex = 0;
-  late PageController _pageController;
 
   @override
   Widget build(BuildContext context) {
     final place = dummyPlace;
+    final filteredPlaces =
+        widget.filteredPlaces.isNotEmpty ? widget.filteredPlaces : place;
+
     return ListView.builder(
       itemBuilder: (context, index) {
         return PlaceCard(

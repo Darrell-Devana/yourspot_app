@@ -5,7 +5,7 @@ import 'package:yourspot_app/screens/favorite.dart';
 import 'package:yourspot_app/screens/home.dart';
 
 class CoreScreen extends StatefulWidget {
-  const CoreScreen({super.key});
+  const CoreScreen({Key? key}) : super(key: key);
 
   @override
   State<CoreScreen> createState() => _CoreScreenState();
@@ -26,6 +26,12 @@ class _CoreScreenState extends State<CoreScreen> {
   void dispose() {
     _pageController.dispose();
     super.dispose();
+  }
+
+  void updateFilteredPlaces(List<Place> filteredList) {
+    setState(() {
+      filteredPlaces = filteredList;
+    });
   }
 
   @override
@@ -67,12 +73,12 @@ class _CoreScreenState extends State<CoreScreen> {
                 prefixIcon: const Icon(Icons.search),
               ),
               onChanged: (value) {
+                List<Place> filteredList = place
+                    .where((place) =>
+                        place.title.toLowerCase().contains(value.toLowerCase()))
+                    .toList();
                 setState(() {
-                  filteredPlaces = place
-                      .where((place) => place.title
-                          .toLowerCase()
-                          .contains(value.toLowerCase()))
-                      .toList();
+                  filteredPlaces = filteredList;
                 });
               },
             ),
@@ -86,8 +92,11 @@ class _CoreScreenState extends State<CoreScreen> {
             _currentIndex = index;
           });
         },
-        children: const [
-          HomeScreen(),
+        children: [
+          HomeScreen(
+            filteredPlaces: filteredPlaces,
+            updateFilteredPlaces: updateFilteredPlaces,
+          ),
           FavoriteScreen(),
         ],
       ),
