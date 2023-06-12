@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yourspot_app/screens/core.dart';
 import 'package:yourspot_app/screens/favorite.dart';
 import 'package:yourspot_app/screens/home.dart';
 import 'package:yourspot_app/screens/place_detail.dart';
@@ -13,12 +14,13 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const HomeScreen(),
+      home: const CoreScreen(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,
       ),
       routes: {
+        HomeScreen.routeName: (context) => const HomeScreen(),
         FavoriteScreen.routeName: (context) => const FavoriteScreen(),
         PlaceDetail.routeName: (context) => const PlaceDetail(),
       },
