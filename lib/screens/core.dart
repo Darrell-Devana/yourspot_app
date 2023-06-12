@@ -5,7 +5,8 @@ import 'package:yourspot_app/screens/favorite.dart';
 import 'package:yourspot_app/screens/home.dart';
 
 class CoreScreen extends StatefulWidget {
-  const CoreScreen({Key? key}) : super(key: key);
+  static const String routeName = '/core';
+  const CoreScreen({super.key});
 
   @override
   State<CoreScreen> createState() => _CoreScreenState();
@@ -13,6 +14,7 @@ class CoreScreen extends StatefulWidget {
 
 class _CoreScreenState extends State<CoreScreen> {
   List<Place> filteredPlaces = [];
+  List<Place> favoritePlaces = [];
   int _currentIndex = 0;
   late PageController _pageController;
 
@@ -31,6 +33,12 @@ class _CoreScreenState extends State<CoreScreen> {
   void updateFilteredPlaces(List<Place> filteredList) {
     setState(() {
       filteredPlaces = filteredList;
+    });
+  }
+
+  void updateFavoritePlaces(List<Place> favoriteList) {
+    setState(() {
+      favoritePlaces = favoriteList;
     });
   }
 
@@ -105,8 +113,8 @@ class _CoreScreenState extends State<CoreScreen> {
             updateFilteredPlaces: updateFilteredPlaces,
           ),
           FavoriteScreen(
-            filteredPlaces: filteredPlaces,
-            updateFilteredPlaces: updateFilteredPlaces,
+            filteredPlaces: favoritePlaces,
+            updateFilteredPlaces: updateFavoritePlaces,
           ),
         ],
       ),

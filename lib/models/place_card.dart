@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:yourspot_app/screens/place_detail.dart';
+import 'package:yourspot_app/models/place.dart';
 
-class PlaceCard extends StatelessWidget {
+class PlaceCard extends StatefulWidget {
   final String id;
   final String title;
   final String imageUrl;
@@ -14,10 +15,16 @@ class PlaceCard extends StatelessWidget {
     required this.availability,
   });
 
+  @override
+  State<PlaceCard> createState() => _PlaceCardState();
+}
+
+class _PlaceCardState extends State<PlaceCard> {
+  final List<Place> favoritePlaces = [];
   void selectPlace(BuildContext context) {
     Navigator.of(context).pushNamed(
       PlaceDetail.routeName,
-      arguments: {'id': id, 'title': title, 'imageUrl': imageUrl},
+      arguments: {'id': widget.id, 'title': widget.title, 'imageUrl': widget.imageUrl},
     );
   }
 
@@ -41,7 +48,7 @@ class PlaceCard extends StatelessWidget {
                     topRight: Radius.circular(15),
                   ),
                   child: Image.network(
-                    imageUrl,
+                    widget.imageUrl,
                     height: 150,
                     width: double.infinity,
                     fit: BoxFit.cover,
@@ -57,7 +64,7 @@ class PlaceCard extends StatelessWidget {
                       horizontal: 10,
                     ),
                     child: Text(
-                      title,
+                      widget.title,
                       style: const TextStyle(
                         fontSize: 26,
                         fontWeight: FontWeight.bold,
@@ -79,7 +86,7 @@ class PlaceCard extends StatelessWidget {
                     children: [
                       const Icon(Icons.car_repair),
                       const SizedBox(width: 6),
-                      Text('$availability Spots'),
+                      Text('${widget.availability} Spots'),
                     ],
                   ),
                 ],
