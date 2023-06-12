@@ -5,7 +5,12 @@ import 'package:yourspot_app/models/place.dart';
 
 class FavoriteScreen extends StatefulWidget {
   static const String routeName = '/favorite';
-  const FavoriteScreen({super.key});
+  final List<Place> filteredPlaces;
+  final Function(List<Place> filteredList) updateFilteredPlaces;
+  const FavoriteScreen(
+      {super.key,
+      required this.filteredPlaces,
+      required this.updateFilteredPlaces});
 
   @override
   State<FavoriteScreen> createState() => _FavoriteScreenState();
@@ -17,6 +22,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   @override
   Widget build(BuildContext context) {
     final place = dummyPlace;
+    final filteredPlaces =
+        widget.filteredPlaces.isNotEmpty ? widget.filteredPlaces : place;
+
     return ListView.builder(
       itemBuilder: (context, index) {
         return PlaceCard(
