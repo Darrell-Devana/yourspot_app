@@ -15,8 +15,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    bool isSearchBarExpanded = false;
-    double searchBarHeight = 48.0;
     final place = dummyPlace;
     return Scaffold(
       appBar: AppBar(

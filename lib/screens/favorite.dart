@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:yourspot_app/dummy_data/dummy_data.dart';
+import 'package:yourspot_app/models/place_card.dart';
+import 'package:yourspot_app/models/place.dart';
 
 class FavoriteScreen extends StatefulWidget {
+  static const String routeName = '/favorite';
   const FavoriteScreen({super.key});
 
   @override
@@ -8,10 +12,14 @@ class FavoriteScreen extends StatefulWidget {
 }
 
 class _FavoriteScreenState extends State<FavoriteScreen> {
+  List<Place> filteredPlaces = [];
+
   @override
   Widget build(BuildContext context) {
+    final place = dummyPlace;
     return Scaffold(
       appBar: AppBar(
+        elevation: 5,
         centerTitle: false,
         title: const Text(
           'YourSpot',
@@ -43,18 +51,38 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                 contentPadding: const EdgeInsets.symmetric(vertical: 8.0),
                 prefixIcon: const Icon(Icons.search),
               ),
+              onChanged: (value) {
+                setState(() {
+                  filteredPlaces = place
+                      .where((place) => place.title
+                          .toLowerCase()
+                          .contains(value.toLowerCase()))
+                      .toList();
+                });
+              },
             ),
           ),
         ),
       ),
-      body: const Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-              child: Text(
-            'Hello World!',
-          )),
-        ],
+      body: ListView.builder(
+        itemBuilder: (context, index) {
+          return PlaceCard(
+            id: filteredPlaces.isNotEmpty
+                ? filteredPlaces[index].id
+                : place[index].id,
+            title: filteredPlaces.isNotEmpty
+                ? filteredPlaces[index].title
+                : place[index].title,
+            imageUrl: filteredPlaces.isNotEmpty
+                ? filteredPlaces[index].imageUrl
+                : place[index].imageUrl,
+            availability: filteredPlaces.isNotEmpty
+                ? filteredPlaces[index].availability
+                : place[index].availability,
+          );
+        },
+        itemCount:
+            filteredPlaces.isNotEmpty ? filteredPlaces.length : place.length,
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const [

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yourspot_app/screens/place_detail.dart';
 
 class PlaceCard extends StatelessWidget {
   final String id;
@@ -14,13 +15,10 @@ class PlaceCard extends StatelessWidget {
   });
 
   void selectPlace(BuildContext context) {
-    // Navigator.of(context).pushNamed(
-    //   RecipeScreen.routeName,
-    //   arguments: {
-    //     'id': meal.id,
-    //     'title': meal.title,
-    //   },
-    // );
+    Navigator.of(context).pushNamed(
+      PlaceDetail.routeName,
+      arguments: {'id': id, 'title': title},
+    );
   }
 
   @override
@@ -44,7 +42,7 @@ class PlaceCard extends StatelessWidget {
                   ),
                   child: Image.network(
                     imageUrl,
-                    height: 250,
+                    height: 150,
                     width: double.infinity,
                     fit: BoxFit.cover,
                   ),
@@ -73,7 +71,7 @@ class PlaceCard extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
