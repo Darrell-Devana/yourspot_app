@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yourspot_app/dummy_data/dummy_data.dart';
 import 'package:yourspot_app/models/place_card.dart';
+import 'package:yourspot_app/models/place.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -10,6 +11,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<Place> filteredPlaces = [];
+
   @override
   Widget build(BuildContext context) {
     final place = dummyPlace;
@@ -47,6 +50,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 contentPadding: const EdgeInsets.symmetric(vertical: 8.0),
                 prefixIcon: const Icon(Icons.search),
               ),
+              onChanged: (value) {
+                setState(() {
+                  filteredPlaces = place
+                      .where((place) => place.title
+                          .toLowerCase()
+                          .contains(value.toLowerCase()))
+                      .toList();
+                });
+              },
             ),
           ),
         ),
@@ -54,13 +66,22 @@ class _HomeScreenState extends State<HomeScreen> {
       body: ListView.builder(
         itemBuilder: (context, index) {
           return PlaceCard(
-            id: place[index].id,
-            title: place[index].title,
-            imageUrl: place[index].imageUrl,
-            availability: place[index].availability,
+            id: filteredPlaces.isNotEmpty
+                ? filteredPlaces[index].id
+                : place[index].id,
+            title: filteredPlaces.isNotEmpty
+                ? filteredPlaces[index].title
+                : place[index].title,
+            imageUrl: filteredPlaces.isNotEmpty
+                ? filteredPlaces[index].imageUrl
+                : place[index].imageUrl,
+            availability: filteredPlaces.isNotEmpty
+                ? filteredPlaces[index].availability
+                : place[index].availability,
           );
         },
-        itemCount: place.length,
+        itemCount:
+            filteredPlaces.isNotEmpty ? filteredPlaces.length : place.length,
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const [
