@@ -13,7 +13,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<Place> filteredPlaces = [];
-  int _currentIndex = 0;
+  final int _currentIndex = 0;
   late PageController _pageController;
 
   @override

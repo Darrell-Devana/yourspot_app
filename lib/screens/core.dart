@@ -86,7 +86,7 @@ class _CoreScreenState extends State<CoreScreen> {
             _currentIndex = index;
           });
         },
-        children: [
+        children: const [
           HomeScreen(),
           FavoriteScreen(),
         ],

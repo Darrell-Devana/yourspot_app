@@ -11,7 +11,7 @@ class PlaceDetail extends StatefulWidget {
 class _PlaceDetailState extends State<PlaceDetail> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: Text('Hello World!'),
       ),
