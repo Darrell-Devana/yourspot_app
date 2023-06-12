@@ -26,7 +26,7 @@ class _PlaceDetailState extends State<PlaceDetail> {
     final appBar = AppBar(
       title: Text(
         selectedPlace.title,
-        style: TextStyle(fontWeight: FontWeight.bold),
+        style: const TextStyle(fontWeight: FontWeight.bold),
       ),
     );
 
@@ -81,14 +81,14 @@ class _PlaceDetailState extends State<PlaceDetail> {
                               fontSize: 18,
                             ),
                           ),
-                          Icon(Icons.car_repair)
+                          const Icon(Icons.car_repair)
                         ],
                       ),
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
 
               Expanded(
                 child: ListView.builder(
@@ -112,8 +112,8 @@ class _PlaceDetailState extends State<PlaceDetail> {
                               : 'Unavailable',
                           style: TextStyle(
                             color: parkingSpace.isAvailable
-                                ? Color.fromARGB(255, 49, 255, 56)
-                                : Color.fromARGB(255, 255, 44, 29),
+                                ? const Color.fromARGB(255, 49, 255, 56)
+                                : const Color.fromARGB(255, 255, 44, 29),
                             fontWeight: FontWeight.bold,
                           ),
                         ),
