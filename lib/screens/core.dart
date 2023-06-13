@@ -2,9 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:yourspot_app/dummy_data/dummy_data.dart';
 import 'package:yourspot_app/models/place.dart';
-import 'package:yourspot_app/screens/favorite.dart';
 import 'package:yourspot_app/screens/home.dart';
-import 'package:yourspot_app/models/place_card.dart';
 
 class CoreScreen extends StatefulWidget {
   static const String routeName = '/core';
@@ -115,37 +113,33 @@ class _CoreScreenState extends State<CoreScreen> {
             filteredPlaces: filteredPlaces,
             updateFilteredPlaces: updateFilteredPlaces,
           ),
-          FavoriteScreen(
-            favoritePlaces: favoritePlaces,
-            updateFavoritePlaces: updateFavoritePlaces,
-          ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (int index) {
-          setState(() {
-            _currentIndex = index;
-          });
-          _pageController.animateToPage(
-            index,
-            duration: const Duration(milliseconds: 1000),
-            curve: Curves.fastLinearToSlowEaseIn,
-          );
-        },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Favorites',
-          ),
-        ],
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
-      ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   currentIndex: _currentIndex,
+      //   onTap: (int index) {
+      //     setState(() {
+      //       _currentIndex = index;
+      //     });
+      //     _pageController.animateToPage(
+      //       index,
+      //       duration: const Duration(milliseconds: 1000),
+      //       curve: Curves.fastLinearToSlowEaseIn,
+      //     );
+      //   },
+      //   items: [
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.home),
+      //       label: 'Home',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.favorite),
+      //       label: 'Favorites',
+      //     ),
+      //   ],
+      //   selectedItemColor: Colors.blue,
+      //   unselectedItemColor: Colors.grey,
+      // ),
     );
   }
 }

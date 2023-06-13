@@ -6,7 +6,7 @@ import 'package:yourspot_app/models/place.dart';
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/home';
   final List<Place> filteredPlaces;
-  final Function(List<Place> filteredList) updateFilteredPlaces;
+  final Function(List<Place> filteredList)? updateFilteredPlaces;
 
   const HomeScreen({
     super.key,
@@ -42,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
           availability: filteredPlaces.isNotEmpty
               ? filteredPlaces[index].availability
               : place[index].availability,
+          updateFavoritePlaces: (List<Place> favoriteList) {},
         );
       },
       itemCount:

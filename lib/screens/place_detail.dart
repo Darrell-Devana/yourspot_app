@@ -17,38 +17,42 @@ class _PlaceDetailState extends State<PlaceDetail> {
 
   @override
   Widget build(BuildContext context) {
-    final routeArgs = ModalRoute.of(context)!.settings.arguments as Map<String, String>;
+    final routeArgs =
+        ModalRoute.of(context)!.settings.arguments as Map<String, String>;
     final String placeId = routeArgs['id']!;
     final String placeImageUrl = routeArgs['imageUrl']!;
     final selectedPlace = dummyPlace.firstWhere((place) => place.id == placeId);
-    final filteredParkingSpace = dummyParkingSpace.where((space) => space.category == selectedPlace.id).toList();
+    final filteredParkingSpace = dummyParkingSpace
+        .where((space) => space.category == selectedPlace.id)
+        .toList();
     final mediaQuery = MediaQuery.of(context);
     final appBar = AppBar(
       title: Text(
         selectedPlace.title,
         style: const TextStyle(fontWeight: FontWeight.bold),
       ),
-      actions: [
-        IconButton(
-          onPressed: () {
-            setState(() {
-              isFavorite = !isFavorite;
-              if (isFavorite) {
-                favoritePlaces.add(selectedPlace.id);
-              } else {
-                favoritePlaces.remove(selectedPlace.id);
-              }
-            });
-          },
-          icon: Icon(
-            isFavorite ? Icons.favorite : Icons.favorite_border,
-            color: Colors.red,
-          ),
-        ),
-      ],
+      // actions: [
+      //   IconButton(
+      //     onPressed: () {
+      //       setState(() {
+      //         isFavorite = !isFavorite;
+      //         if (isFavorite) {
+      //           favoritePlaces.add(selectedPlace.id);
+      //         } else {
+      //           favoritePlaces.remove(selectedPlace.id);
+      //         }
+      //       });
+      //     },
+      //     icon: Icon(
+      //       isFavorite ? Icons.favorite : Icons.favorite_border,
+      //       color: Colors.red,
+      //     ),
+      //   ),
+      // ],
     );
 
-    final int availableSpaces = filteredParkingSpace.where((space) => space.isAvailable).length;
+    final int availableSpaces =
+        filteredParkingSpace.where((space) => space.isAvailable).length;
     final int totalSpaces = filteredParkingSpace.length;
 
     return Scaffold(
@@ -112,7 +116,8 @@ class _PlaceDetailState extends State<PlaceDetail> {
                   itemBuilder: (context, index) {
                     ParkingSpace parkingSpace = filteredParkingSpace[index];
                     return Padding(
-                      padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
+                      padding:
+                          const EdgeInsets.only(left: 8, right: 8, bottom: 8),
                       child: ListTile(
                         title: Text(
                           parkingSpace.id,
@@ -122,7 +127,9 @@ class _PlaceDetailState extends State<PlaceDetail> {
                           ),
                         ),
                         trailing: Text(
-                          parkingSpace.isAvailable ? 'Available' : 'Unavailable',
+                          parkingSpace.isAvailable
+                              ? 'Available'
+                              : 'Unavailable',
                           style: TextStyle(
                             color: parkingSpace.isAvailable
                                 ? const Color.fromARGB(255, 49, 255, 56)
@@ -132,7 +139,9 @@ class _PlaceDetailState extends State<PlaceDetail> {
                         ),
                         shape: RoundedRectangleBorder(
                           side: BorderSide(
-                            color: parkingSpace.isAvailable ? Colors.green : Colors.red,
+                            color: parkingSpace.isAvailable
+                                ? Colors.green
+                                : Colors.red,
                             width: 2,
                           ),
                           borderRadius: BorderRadius.circular(8),

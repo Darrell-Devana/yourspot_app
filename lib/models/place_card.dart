@@ -7,6 +7,7 @@ class PlaceCard extends StatefulWidget {
   final String title;
   final String imageUrl;
   final int availability;
+  final Function(List<Place> favoriteList) updateFavoritePlaces;
 
   const PlaceCard({
     Key? key,
@@ -14,6 +15,7 @@ class PlaceCard extends StatefulWidget {
     required this.title,
     required this.imageUrl,
     required this.availability,
+    required this.updateFavoritePlaces,
   }) : super(key: key);
 
   @override
@@ -49,6 +51,8 @@ class _PlaceCardState extends State<PlaceCard> {
       } else {
         favoritePlaces.removeWhere((place) => place.id == widget.id);
       }
+
+      widget.updateFavoritePlaces(favoritePlaces);
     });
   }
 
@@ -99,13 +103,13 @@ class _PlaceCardState extends State<PlaceCard> {
                           softWrap: true,
                           overflow: TextOverflow.fade,
                         ),
-                        IconButton(
-                          onPressed: toggleFavorite,
-                          icon: Icon(
-                            isFavorite ? Icons.favorite : Icons.favorite_border,
-                            color: isFavorite ? Colors.red : Colors.white,
-                          ),
-                        ),
+                        // IconButton(
+                        //   onPressed: toggleFavorite,
+                        //   icon: Icon(
+                        //     isFavorite ? Icons.favorite : Icons.favorite_border,
+                        //     color: isFavorite ? Colors.red : Colors.white,
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
