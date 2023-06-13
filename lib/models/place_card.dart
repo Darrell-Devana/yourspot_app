@@ -7,25 +7,49 @@ class PlaceCard extends StatefulWidget {
   final String title;
   final String imageUrl;
   final int availability;
+
   const PlaceCard({
-    super.key,
+    Key? key,
     required this.id,
     required this.title,
     required this.imageUrl,
     required this.availability,
-  });
+  }) : super(key: key);
 
   @override
   State<PlaceCard> createState() => _PlaceCardState();
 }
 
 class _PlaceCardState extends State<PlaceCard> {
-  final List<Place> favoritePlaces = [];
+  bool isFavorite = false;
+  List<Place> favoritePlaces = [];
+
   void selectPlace(BuildContext context) {
     Navigator.of(context).pushNamed(
       PlaceDetail.routeName,
-      arguments: {'id': widget.id, 'title': widget.title, 'imageUrl': widget.imageUrl},
+      arguments: {
+        'id': widget.id,
+        'title': widget.title,
+        'imageUrl': widget.imageUrl
+      },
     );
+  }
+
+  void toggleFavorite() {
+    setState(() {
+      isFavorite = !isFavorite;
+
+      if (isFavorite) {
+        favoritePlaces.add(Place(
+          id: widget.id,
+          title: widget.title,
+          imageUrl: widget.imageUrl,
+          availability: widget.availability,
+        ));
+      } else {
+        favoritePlaces.removeWhere((place) => place.id == widget.id);
+      }
+    });
   }
 
   @override
@@ -63,15 +87,26 @@ class _PlaceCardState extends State<PlaceCard> {
                       vertical: 5,
                       horizontal: 10,
                     ),
-                    child: Text(
-                      widget.title,
-                      style: const TextStyle(
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                      softWrap: true,
-                      overflow: TextOverflow.fade,
+                    child: Row(
+                      children: [
+                        Text(
+                          widget.title,
+                          style: const TextStyle(
+                            fontSize: 26,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                          softWrap: true,
+                          overflow: TextOverflow.fade,
+                        ),
+                        IconButton(
+                          onPressed: toggleFavorite,
+                          icon: Icon(
+                            isFavorite ? Icons.favorite : Icons.favorite_border,
+                            color: isFavorite ? Colors.red : Colors.white,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

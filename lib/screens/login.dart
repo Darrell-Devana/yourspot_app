@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({super.key});
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -36,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
       return userCredential;
     } catch (error) {
       // Handle sign-in error
-      throw error;
+      rethrow;
     }
   }
 
@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 224, 224, 224),
+      backgroundColor: const Color.fromARGB(255, 224, 224, 224),
       body: SafeArea(
         child: Center(
           child: Column(
@@ -155,13 +155,13 @@ class _LoginPageState extends State<LoginPage> {
                   // google button
                   InkWell(
                     onTap: () {},
-                    child: SquareTile(imagePath: 'lib/images/google.png'),
+                    child: const SquareTile(imagePath: 'lib/images/google.png'),
                   ),
 
-                  SizedBox(width: 25),
+                  const SizedBox(width: 25),
 
                   // apple button
-                  SquareTile(imagePath: 'lib/images/apple.png')
+                  const SquareTile(imagePath: 'lib/images/apple.png')
                 ],
               ),
 

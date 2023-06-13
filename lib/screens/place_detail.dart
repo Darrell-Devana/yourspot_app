@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:yourspot_app/dummy_data/dummy_data.dart';
-import '../models/parking_space.dart';
+import 'package:yourspot_app/models/parking_space.dart';
 
 class PlaceDetail extends StatefulWidget {
   static const String routeName = '/placedetail';
 
-  const PlaceDetail({super.key});
+  const PlaceDetail({Key? key}) : super(key: key);
 
   @override
   State<PlaceDetail> createState() => _PlaceDetailState();
@@ -13,16 +13,15 @@ class PlaceDetail extends StatefulWidget {
 
 class _PlaceDetailState extends State<PlaceDetail> {
   bool isFavorite = false;
+  List<String> favoritePlaces = [];
+
   @override
   Widget build(BuildContext context) {
-    final routeArgs =
-        ModalRoute.of(context)!.settings.arguments as Map<String, String>;
+    final routeArgs = ModalRoute.of(context)!.settings.arguments as Map<String, String>;
     final String placeId = routeArgs['id']!;
     final String placeImageUrl = routeArgs['imageUrl']!;
     final selectedPlace = dummyPlace.firstWhere((place) => place.id == placeId);
-    final filteredParkingSpace = dummyParkingSpace
-        .where((space) => space.category == selectedPlace.id)
-        .toList();
+    final filteredParkingSpace = dummyParkingSpace.where((space) => space.category == selectedPlace.id).toList();
     final mediaQuery = MediaQuery.of(context);
     final appBar = AppBar(
       title: Text(
@@ -34,6 +33,11 @@ class _PlaceDetailState extends State<PlaceDetail> {
           onPressed: () {
             setState(() {
               isFavorite = !isFavorite;
+              if (isFavorite) {
+                favoritePlaces.add(selectedPlace.id);
+              } else {
+                favoritePlaces.remove(selectedPlace.id);
+              }
             });
           },
           icon: Icon(
@@ -44,19 +48,16 @@ class _PlaceDetailState extends State<PlaceDetail> {
       ],
     );
 
-    final int availableSpaces =
-        filteredParkingSpace.where((space) => space.isAvailable).length;
+    final int availableSpaces = filteredParkingSpace.where((space) => space.isAvailable).length;
     final int totalSpaces = filteredParkingSpace.length;
 
     return Scaffold(
       appBar: appBar,
       body: SingleChildScrollView(
-        // Wrap with SingleChildScrollView
         child: SizedBox(
-          height: mediaQuery.size.height, // Set a fixed height
+          height: mediaQuery.size.height,
           child: Column(
             children: [
-              // Image widget (adjust the size to your needs)
               Stack(
                 children: [
                   ClipRRect(
@@ -66,7 +67,9 @@ class _PlaceDetailState extends State<PlaceDetail> {
                     ),
                     child: ColorFiltered(
                       colorFilter: ColorFilter.mode(
-                          Colors.black.withOpacity(0.6), BlendMode.darken),
+                        Colors.black.withOpacity(0.6),
+                        BlendMode.darken,
+                      ),
                       child: SizedBox(
                         height: mediaQuery.size.height * 0.2,
                         width: mediaQuery.size.width,
@@ -103,15 +106,13 @@ class _PlaceDetailState extends State<PlaceDetail> {
                 ],
               ),
               const SizedBox(height: 10),
-
               Expanded(
                 child: ListView.builder(
                   itemCount: filteredParkingSpace.length,
                   itemBuilder: (context, index) {
                     ParkingSpace parkingSpace = filteredParkingSpace[index];
                     return Padding(
-                      padding:
-                          const EdgeInsets.only(left: 8, right: 8, bottom: 8),
+                      padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
                       child: ListTile(
                         title: Text(
                           parkingSpace.id,
@@ -121,9 +122,7 @@ class _PlaceDetailState extends State<PlaceDetail> {
                           ),
                         ),
                         trailing: Text(
-                          parkingSpace.isAvailable
-                              ? 'Available'
-                              : 'Unavailable',
+                          parkingSpace.isAvailable ? 'Available' : 'Unavailable',
                           style: TextStyle(
                             color: parkingSpace.isAvailable
                                 ? const Color.fromARGB(255, 49, 255, 56)
@@ -133,9 +132,7 @@ class _PlaceDetailState extends State<PlaceDetail> {
                         ),
                         shape: RoundedRectangleBorder(
                           side: BorderSide(
-                            color: parkingSpace.isAvailable
-                                ? Colors.green
-                                : Colors.red,
+                            color: parkingSpace.isAvailable ? Colors.green : Colors.red,
                             width: 2,
                           ),
                           borderRadius: BorderRadius.circular(8),
