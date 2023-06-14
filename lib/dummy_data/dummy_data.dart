@@ -27,8 +27,8 @@ List<Place> dummyPlace = [
 
 List<ParkingSpace> dummyParkingSpace = [
   ParkingSpace(id: 'A1', isAvailable: true, category: 'm1'),
-  ParkingSpace(id: 'A2', isAvailable: false, category: 'm1'),
-  ParkingSpace(id: 'A3', isAvailable: true, category: 'm1'),
+  ParkingSpace(id: 'A2', isAvailable: true, category: 'm1'),
+  ParkingSpace(id: 'A3', isAvailable: false, category: 'm1'),
   ParkingSpace(id: 'A4', isAvailable: true, category: 'm1'),
   ParkingSpace(id: 'A5', isAvailable: true, category: 'm1'),
   ParkingSpace(id: 'A6', isAvailable: false, category: 'm1'),
