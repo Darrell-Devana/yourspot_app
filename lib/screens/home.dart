@@ -42,7 +42,6 @@ class _HomeScreenState extends State<HomeScreen> {
           availability: filteredPlaces.isNotEmpty
               ? filteredPlaces[index].availability
               : place[index].availability,
-          updateFavoritePlaces: (List<Place> favoriteList) {},
         );
       },
       itemCount:
