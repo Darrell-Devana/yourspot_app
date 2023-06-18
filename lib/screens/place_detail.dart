@@ -12,8 +12,6 @@ class PlaceDetail extends StatefulWidget {
 }
 
 class _PlaceDetailState extends State<PlaceDetail> {
-  bool isFavorite = false;
-  List<String> favoritePlaces = [];
 
   @override
   Widget build(BuildContext context) {

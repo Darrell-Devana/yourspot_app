@@ -7,14 +7,14 @@ import 'package:yourspot_app/screens/home.dart';
 import 'package:yourspot_app/screens/place_detail.dart';
 import 'models/place.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 
-Future<void> initializeFirebase() async {
-  await Firebase.initializeApp();
-}
+final FirebaseDatabase database = FirebaseDatabase.instance;
+DatabaseReference databaseReference = database.ref();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initializeFirebase();
+  await Firebase.initializeApp();
   runApp(const MainApp());
 }
 
