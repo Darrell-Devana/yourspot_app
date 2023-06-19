@@ -1,6 +1,24 @@
+import 'package:flutter/material.dart';
+
 import '/models/place.dart';
 import 'package:yourspot_app/models/parking_space.dart';
 import 'package:firebase_database/firebase_database.dart';
+
+class Data extends StatefulWidget {
+  const Data({super.key});
+
+  @override
+  State<Data> createState() => _DataState();
+}
+
+class _DataState extends State<Data> {
+  @override
+  bool dataA1Ref = false;
+
+  Widget build(BuildContext context) {
+    return MaterialApp();
+  }
+}
 
 List<Place> dummyPlace = [
   Place(
