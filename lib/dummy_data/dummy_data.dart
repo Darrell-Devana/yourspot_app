@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '/models/place.dart';
 import 'package:yourspot_app/models/parking_space.dart';
-import 'package:firebase_database/firebase_database.dart';
 
 class Data extends StatefulWidget {
   const Data({super.key});
@@ -15,8 +14,9 @@ class _DataState extends State<Data> {
   @override
   bool dataA1Ref = false;
 
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp();
+    return const MaterialApp();
   }
 }
 

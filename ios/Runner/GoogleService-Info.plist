@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>805740518939-atf5o0ui3tkpgba35sempahh4tp4gmvs.apps.googleusercontent.com</string>
+	<string>808217278836-amc3smocp7qpl6pq7f8vs9pol7dk1jkb.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.805740518939-atf5o0ui3tkpgba35sempahh4tp4gmvs</string>
+	<string>com.googleusercontent.apps.808217278836-amc3smocp7qpl6pq7f8vs9pol7dk1jkb</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCy3D0CYJwEeyxjl3t4rWoDAo0vW5D78N0</string>
+	<string>AIzaSyDAFoIUZaxvThxS-oojbLKV_bcv_anmSHs</string>
 	<key>GCM_SENDER_ID</key>
-	<string>805740518939</string>
+	<string>808217278836</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.example.yourspotApp</string>
 	<key>PROJECT_ID</key>
-	<string>yourspot-3cd1b</string>
+	<string>finalsmartparking</string>
 	<key>STORAGE_BUCKET</key>
-	<string>yourspot-3cd1b.appspot.com</string>
+	<string>finalsmartparking.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:805740518939:ios:3bcd8437bf862abdaba2be</string>
+	<string>1:808217278836:ios:f7d539b2068ed648285421</string>
+	<key>DATABASE_URL</key>
+	<string>https://finalsmartparking-default-rtdb.asia-southeast1.firebasedatabase.app</string>
 </dict>
 </plist>

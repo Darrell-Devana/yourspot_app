@@ -62,12 +62,13 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCy3D0CYJwEeyxjl3t4rWoDAo0vW5D78N0',
-    appId: '1:805740518939:ios:3bcd8437bf862abdaba2be',
-    messagingSenderId: '805740518939',
-    projectId: 'yourspot-3cd1b',
-    storageBucket: 'yourspot-3cd1b.appspot.com',
-    iosClientId: '805740518939-atf5o0ui3tkpgba35sempahh4tp4gmvs.apps.googleusercontent.com',
+    apiKey: 'AIzaSyDAFoIUZaxvThxS-oojbLKV_bcv_anmSHs',
+    appId: '1:808217278836:ios:f7d539b2068ed648285421',
+    messagingSenderId: '808217278836',
+    projectId: 'finalsmartparking',
+    storageBucket: 'finalsmartparking.appspot.com',
+    iosClientId:
+        '808217278836-amc3smocp7qpl6pq7f8vs9pol7dk1jkb.apps.googleusercontent.com',
     iosBundleId: 'com.example.yourspotApp',
   );
 
@@ -77,7 +78,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '805740518939',
     projectId: 'yourspot-3cd1b',
     storageBucket: 'yourspot-3cd1b.appspot.com',
-    iosClientId: '805740518939-h4gm2p2osbpi7o74rpji6349f5qb02j0.apps.googleusercontent.com',
+    iosClientId:
+        '805740518939-h4gm2p2osbpi7o74rpji6349f5qb02j0.apps.googleusercontent.com',
     iosBundleId: 'com.example.yourspotApp.RunnerTests',
   );
 }

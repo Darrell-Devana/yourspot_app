@@ -5,7 +5,7 @@ import 'package:yourspot_app/dummy_data/dummy_data.dart';
 class PlaceDetail extends StatefulWidget {
   static const String routeName = '/placedetail';
 
-  const PlaceDetail({Key? key}) : super(key: key);
+  PlaceDetail({super.key});
 
   @override
   State<PlaceDetail> createState() => _PlaceDetailState();
@@ -13,12 +13,34 @@ class PlaceDetail extends StatefulWidget {
 
 class _PlaceDetailState extends State<PlaceDetail> {
   final databaseRef = FirebaseDatabase.instance.ref();
+  String? weatherDescription;
 
   List<Object?> parkingSpaceIds = [];
 
   @override
   void initState() {
     super.initState();
+    fetchWeatherDescription();
+  }
+
+  void fetchWeatherDescription() {
+    DatabaseReference reference = databaseRef
+        .child('cuaca')
+        .child('rain_sensor')
+        .child('rainDescription');
+
+    reference.once().then((DatabaseEvent event) {
+      DataSnapshot snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          weatherDescription = (snapshot.value.toString());
+        });
+      } else {
+        setState(() {
+          weatherDescription = ('');
+        });
+      }
+    });
   }
 
   @override
@@ -35,24 +57,24 @@ class _PlaceDetailState extends State<PlaceDetail> {
         selectedPlace.title,
         style: const TextStyle(fontWeight: FontWeight.bold),
       ),
-      // actions: [
-      //   IconButton(
-      //     onPressed: () {
-      //       setState(() {
-      //         isFavorite = !isFavorite;
-      //         if (isFavorite) {
-      //           favoritePlaces.add(selectedPlace.id);
-      //         } else {
-      //           favoritePlaces.remove(selectedPlace.id);
-      //         }
-      //       });
-      //     },
-      //     icon: Icon(
-      //       isFavorite ? Icons.favorite : Icons.favorite_border,
-      //       color: Colors.red,
-      //     ),
-      //   ),
-      // ],
+      actions: [
+        IconButton(
+          onPressed: () {
+            fetchWeatherDescription();
+          },
+          icon: const Icon(
+            Icons.cloud,
+            color: Colors.white,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 19, right: 10),
+          child: Text(
+            weatherDescription.toString(),
+            style: const TextStyle(fontSize: 16),
+          ),
+        ),
+      ],
     );
 
     return Scaffold(
@@ -60,7 +82,7 @@ class _PlaceDetailState extends State<PlaceDetail> {
       body: SizedBox(
         height: mediaQuery.size.height,
         child: StreamBuilder(
-          stream: databaseRef.child('test').onValue,
+          stream: databaseRef.child('sensor').onValue,
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.hasData && snapshot.data!.snapshot.value != null) {
               // Mengambil nilai dari DataSnapshot
@@ -122,7 +144,7 @@ class _PlaceDetailState extends State<PlaceDetail> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Flexible(

@@ -58,7 +58,7 @@ class _MainAppState extends State<MainApp> {
               favoritePlaces: const [],
               updateFavoritePlaces: (List<Place> favoriteList) {},
             ),
-        PlaceDetail.routeName: (context) => const PlaceDetail(),
+        PlaceDetail.routeName: (context) => PlaceDetail(),
       },
     );
   }
