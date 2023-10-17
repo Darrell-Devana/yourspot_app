@@ -11,7 +11,6 @@ class Data extends StatefulWidget {
 }
 
 class _DataState extends State<Data> {
-  @override
   bool dataA1Ref = false;
 
   @override
