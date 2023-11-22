@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -25,7 +28,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -43,22 +49,13 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBdA0UdUt2XF65SZbBS3uvO7cXX03Adzrk',
-    appId: '1:805740518939:web:e9f5d19181c737bfaba2be',
-    messagingSenderId: '805740518939',
-    projectId: 'yourspot-3cd1b',
-    authDomain: 'yourspot-3cd1b.firebaseapp.com',
-    storageBucket: 'yourspot-3cd1b.appspot.com',
-    measurementId: 'G-1K1WCD3JK3',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBYT06AfNfkCkbFkFtrHhpZxRWFN2ps3xI',
-    appId: '1:805740518939:android:eb8aac4465311dc2aba2be',
-    messagingSenderId: '805740518939',
-    projectId: 'yourspot-3cd1b',
-    storageBucket: 'yourspot-3cd1b.appspot.com',
+    apiKey: 'AIzaSyDI0_VAAZ3gnlUD3cHIwekbRQ_tHsNdg0Q',
+    appId: '1:808217278836:android:8d3b4e994f7fcd37285421',
+    messagingSenderId: '808217278836',
+    projectId: 'finalsmartparking',
+    databaseURL: 'https://finalsmartparking-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'finalsmartparking.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
@@ -66,20 +63,9 @@ class DefaultFirebaseOptions {
     appId: '1:808217278836:ios:f7d539b2068ed648285421',
     messagingSenderId: '808217278836',
     projectId: 'finalsmartparking',
+    databaseURL: 'https://finalsmartparking-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'finalsmartparking.appspot.com',
-    iosClientId:
-        '808217278836-amc3smocp7qpl6pq7f8vs9pol7dk1jkb.apps.googleusercontent.com',
+    iosClientId: '808217278836-amc3smocp7qpl6pq7f8vs9pol7dk1jkb.apps.googleusercontent.com',
     iosBundleId: 'com.example.yourspotApp',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCy3D0CYJwEeyxjl3t4rWoDAo0vW5D78N0',
-    appId: '1:805740518939:ios:f7ef4a48aa91a570aba2be',
-    messagingSenderId: '805740518939',
-    projectId: 'yourspot-3cd1b',
-    storageBucket: 'yourspot-3cd1b.appspot.com',
-    iosClientId:
-        '805740518939-h4gm2p2osbpi7o74rpji6349f5qb02j0.apps.googleusercontent.com',
-    iosBundleId: 'com.example.yourspotApp.RunnerTests',
   );
 }
